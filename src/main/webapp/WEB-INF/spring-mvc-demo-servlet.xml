@@ -27,23 +27,40 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- A handler for servin static resources -->
     <mvc:resources mapping="/assets/**" location="/assets/"/>
 
+    <!--  Define Database DataSource -->
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:8080/db_example?autoReconect=true&amp;useSSL=false&amp;serverTimezone=Europe/Warsaw"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
 
+    <!-- These are connection pool properties for C3P0 (Connection Pool) -->
         <property name="instalPoolSize" value="5"/>
         <property name="minPoolSize" value="5"/>
         <property name="maxPoolSize" value="20"/>
         <property name="maxIdleTime" value="30000"/>
     </bean>
 
+    <!-- Setup Hibernate session factory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSoruce" ref="myDataSource"/>
-        <property name="packagesToScan" value="com.order.tracker.en"
+        <property name="packagesToScan" value="com.order.tracker.entities"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
     </bean>
 
+    <!-- Setup Hibernate transaction manager -->
+    <bean id="myTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Enable configuration of transaction behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="myTransactionManager"/>
 </beans>
