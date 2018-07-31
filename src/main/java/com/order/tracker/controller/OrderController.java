@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -16,7 +18,11 @@ public class OrderController {
 
     @GetMapping("/list")
     public String list(Model model){
-        return "";
+
+        List<Order> orders = orderService.getOrders();
+        model.addAttribute("orders", orders);
+
+        return "list-orders";
     }
 
     @GetMapping("/newOrder")
