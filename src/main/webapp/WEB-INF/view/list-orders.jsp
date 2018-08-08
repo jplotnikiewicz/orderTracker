@@ -15,7 +15,7 @@
                 <th>Date of Order</th>
             </tr>
             
-            <c:forEach var="order" item="${orders}">
+            <c:forEach var="order" items="${orders}">
             <tr>
                 <td>${order.customer}</td>
                 <td>${order.price}</td>

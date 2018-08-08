@@ -1,11 +1,13 @@
 package com.order.tracker.entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="order")
+@Table(name="orders")
 public class Order {
 
     @Id
@@ -18,6 +20,7 @@ public class Order {
     private Integer price;
 
     @Column(name = "date_of_order")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date dateOfOrder;
 
     public Order(){

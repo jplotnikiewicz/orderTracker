@@ -31,8 +31,8 @@
 
     <!--  Define Database DataSource -->
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:8080/db_example?autoReconect=true&amp;useSSL=false&amp;serverTimezone=Europe/Warsaw"/>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_example?autoReconect=true&amp;useSSL=false&amp;serverTimezone=Europe/Warsaw"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
 

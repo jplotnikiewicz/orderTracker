@@ -18,7 +18,6 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public List<Order> getOrders() {
-
         Session session = factory.getCurrentSession();
         Query theQuery = session.createQuery("from Order");
         List<Order> orders = theQuery.list();
@@ -28,7 +27,8 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public void saveOrder(Order newOrder) {
-
+        Session session = factory.getCurrentSession();
+        session.save(newOrder);
     }
 
     @Override

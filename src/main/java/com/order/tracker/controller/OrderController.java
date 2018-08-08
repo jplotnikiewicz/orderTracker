@@ -27,12 +27,15 @@ public class OrderController {
 
     @GetMapping("/newOrder")
     public String newOrder(Model model){
-        return "";
+        model.addAttribute("order", new Order());
+        return "order-form";
     }
 
     @PostMapping("/saveOrder")
     public String saveOrder(@ModelAttribute("order")Order order){
-        return "";
+        orderService.saveOrder(order);
+
+        return "redirect:/order/list";
     }
 
     @GetMapping("/viewOrder")
