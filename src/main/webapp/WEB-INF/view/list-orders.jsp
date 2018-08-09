@@ -20,6 +20,10 @@
                 <td>${order.customer}</td>
                 <td>${order.price}</td>
                 <td>${order.dateOfOrder}</td>
+                <td>
+                    <a href="/springHibernate/order/viewOrder?orderId=${order.id}">Update</a>
+                    | | <a href="/springHibernate/order/deleteOrder?orderId=${order.id}" onclick="if(!confirm('Are you sure?')) return false;">Delete</a>
+                </td>
             </tr>
             </c:forEach>
         </table>

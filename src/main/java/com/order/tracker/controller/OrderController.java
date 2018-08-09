@@ -39,13 +39,22 @@ public class OrderController {
     }
 
     @GetMapping("/viewOrder")
-    public String viewOrder(@RequestParam("orderId") int orderOd, Model model){
-        return "";
+    public String viewOrder(@RequestParam("orderId") int orderId, Model model) {
+
+        System.out.println(orderId);
+        Order order = orderService.getOrder(orderId);
+        System.out.println(order.getCustomer());
+        model.addAttribute("order", order);
+
+        return "order-form";
     }
 
     @GetMapping("/deleteOrder")
     public String deleteOrder(@RequestParam("orderId") int orderId, Model model){
-        return "";
+
+        orderService.deleteOrder(orderId);
+
+        return "redirect:/order/list";
     }
 
 
